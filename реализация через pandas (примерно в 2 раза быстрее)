@@ -1,0 +1,12 @@
+import numpy as np # импорт нумпи
+import pandas as pd # импорт пандас
+dispanfile = pd.read_excel("Dispan.xlsx", sheet_name="Sheet1", dtype='object') # создаю переменную и считываю файл диспан.хлс
+disp = pd.DataFrame(dispanfile) # создаю датафрейм на основе файла
+errors = disp['Errors'] # задаю колонку в котором находятся повторы которые нужн удалить
+disp.index += 1 # проходим заголовки и начинаем индексацию со 2й строки
+newerrors = errors.dropna() # удаляю пустые строки стлбца и перезаписываю в другой столбец 
+newerrors = newerrors.astype('int64') # меняю тип на инт
+result = disp.drop(newerrors) # удаляю строки с индексами встречающимися в столбце newerors
+result.to_excel("result.xlsx") # сохраняю полученный файл в корень проекта 
+#print(disp['ENP,C,16'])
+# программа пробегает 150к строк за 2-5 минут
