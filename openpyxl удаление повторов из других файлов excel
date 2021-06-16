@@ -1,0 +1,22 @@
+import openpyxl
+from openpyxl import *
+
+mas = []
+
+
+wb = load_workbook(filename='testxl.xlsx')
+ws1 = wb['sheet1']
+ws2 = wb['sheet2']
+ws2_A = ws2['A']
+ws1_A = ws1['A']
+
+for i in range (len(ws2_A)):
+if i > 0:
+mas.append(ws2_A[i].value)
+
+for i in range (len(ws1_A)):
+if i > 0:
+zn = ws1_A[i].value
+if zn in mas:
+ws1_A[i].value = None
+wb.save('penis.xlsx')
